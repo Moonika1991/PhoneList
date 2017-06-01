@@ -1,5 +1,7 @@
 package sample;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
@@ -7,9 +9,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import sample.model.Person;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 
 public class PersonOverviewController {
 
@@ -31,23 +31,25 @@ public class PersonOverviewController {
 
     @FXML
     private void initialize() {
-        // Initialize the person table with the two columns.
-        nameColumn.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
-        phoneNumberColumn.setCellValueFactory(cellData -> cellData.getValue().phoneNumberProperty());
 
+        // Initialize the person table with the two columns.
+        nameColumn.setCellValueFactory(
+                cellData -> cellData.getValue().nameProperty());
+        phoneNumberColumn.setCellValueFactory(
+                cellData -> cellData.getValue().phoneNumberProperty());
         // Clear person details.
         showPersonDetails(null);
-
         // Listen for selection changes and show the person details when changed.
         personTable.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> showPersonDetails(newValue));
+
     }
 
     public void setMain(Main main) {
         this.main = main;
-
         // Add observable list data to the table
         personTable.setItems(main.getPersonData());
+        readFromFile();
     }
 
     @FXML
@@ -117,11 +119,30 @@ public class PersonOverviewController {
             int size = personTable.getItems().size();
             while(size != 0) {
                 --size;
-                bw.write(nameColumn.getCellData(size) + ". " + phoneNumberColumn.getCellData(size) + "\n");
+                bw.write(nameColumn.getCellData(size) + "." + phoneNumberColumn.getCellData(size) + "\n");
             }
+            bw.close();
         }catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    private void readFromFile() {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream("PhoneBook.txt")))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                if (!line.equals("")) {
+                    Person temp = new Person();
+                    String[] parts = line.split("\\.");
+                    temp.setName(parts[0]);
+                    temp.setPhoneNumber(parts[1]);
+                    main.getPersonData().add(temp);
+                }
+            }
+            br.close();
+        } catch (IOException e) {
+            System.out.println("ERROR: unable to read file");
+            e.printStackTrace();
+        }
+    }
 }
