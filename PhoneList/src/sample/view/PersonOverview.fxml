@@ -12,12 +12,12 @@
    <children>
       <Label layoutX="211.0" layoutY="33.0" text="Name" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="360.0" AnchorPane.topAnchor="35.0" />
       <Label layoutX="211.0" layoutY="70.0" text="Phone" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="360.0" AnchorPane.topAnchor="70.0" />
-      <TextField editable="false" layoutX="262.0" layoutY="29.0" AnchorPane.leftAnchor="260.0" AnchorPane.rightAnchor="190.0" AnchorPane.topAnchor="35.0" />
-      <TextField editable="false" layoutX="262.0" layoutY="66.0" AnchorPane.leftAnchor="260.0" AnchorPane.rightAnchor="190.0" AnchorPane.topAnchor="70.0" />
+      <TextField fx:id="nameField" editable="false" layoutX="262.0" layoutY="29.0" AnchorPane.leftAnchor="260.0" AnchorPane.rightAnchor="190.0" AnchorPane.topAnchor="35.0" />
+      <TextField fx:id="phoneNumberField" editable="false" layoutX="262.0" layoutY="66.0" AnchorPane.leftAnchor="260.0" AnchorPane.rightAnchor="190.0" AnchorPane.topAnchor="70.0" />
       <ButtonBar layoutX="200.0" layoutY="126.0" prefHeight="40.0" prefWidth="200.0" AnchorPane.leftAnchor="170.0" AnchorPane.rightAnchor="165.0" AnchorPane.topAnchor="130.0">
         <buttons>
-          <Button mnemonicParsing="false" text="Add" />
-            <Button mnemonicParsing="false" text="Update" />
+          <Button fx:id="handleAddPerson" mnemonicParsing="false" text="Add" />
+            <Button fx:id="handleUpdatePerson" mnemonicParsing="false" text="Update" />
             <Button mnemonicParsing="false" onAction="#handleDeletePerson" text="Delete" />
         </buttons>
       </ButtonBar>
