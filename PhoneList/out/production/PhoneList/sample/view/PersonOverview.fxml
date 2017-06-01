@@ -16,8 +16,8 @@
       <TextField fx:id="phoneNumberField" editable="false" layoutX="262.0" layoutY="66.0" AnchorPane.leftAnchor="260.0" AnchorPane.rightAnchor="190.0" AnchorPane.topAnchor="70.0" />
       <ButtonBar layoutX="200.0" layoutY="126.0" prefHeight="40.0" prefWidth="200.0" AnchorPane.leftAnchor="170.0" AnchorPane.rightAnchor="165.0" AnchorPane.topAnchor="130.0">
         <buttons>
-          <Button fx:id="handleAddPerson" mnemonicParsing="false" text="Add" />
-            <Button fx:id="handleUpdatePerson" mnemonicParsing="false" text="Update" />
+          <Button mnemonicParsing="false" onAction="#handleAddPerson" text="Add" />
+            <Button mnemonicParsing="false" onAction="#handleUpdatePerson" text="Update" />
             <Button mnemonicParsing="false" onAction="#handleDeletePerson" text="Delete" />
         </buttons>
       </ButtonBar>
