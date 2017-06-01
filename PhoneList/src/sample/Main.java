@@ -16,6 +16,8 @@ public class Main extends Application {
     public void start(Stage primaryStage){
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("Phone List");
+        this.primaryStage.setMinHeight(450);
+        this.primaryStage.setMinWidth(650);
 
         showPersonOverview();
     }
