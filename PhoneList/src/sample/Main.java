@@ -76,12 +76,6 @@ public class Main extends Application {
         }
     }
 
-    public Main() {
-        // Add some sample data
-        personData.add(new Person("Hans, Muster", "333222555"));
-        personData.add(new Person("Ruth, Mueller", "666777444"));
-        personData.add(new Person("Heinz, Kurz", "333222999"));
-    }
 
     public ObservableList<Person> getPersonData() {
         return personData;

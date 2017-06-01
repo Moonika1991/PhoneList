@@ -5,8 +5,11 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 import sample.model.Person;
+
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class PersonOverviewController {
 
@@ -52,6 +55,7 @@ public class PersonOverviewController {
         int selectedIndex = personTable.getSelectionModel().getSelectedIndex();
         if (selectedIndex >= 0) {
             personTable.getItems().remove(selectedIndex);
+            dataToFile();
         } else {
             // Nothing selected.
             Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -70,6 +74,7 @@ public class PersonOverviewController {
         boolean okClicked = main.showPersonUpdateDialog(tempPerson);
         if (okClicked) {
             main.getPersonData().add(tempPerson);
+            dataToFile();
         }
     }
 
@@ -80,6 +85,7 @@ public class PersonOverviewController {
             boolean okClicked = main.showPersonUpdateDialog(selectedPerson);
             if (okClicked) {
                 showPersonDetails(selectedPerson);
+                dataToFile();
             }
 
         } else {
@@ -105,4 +111,17 @@ public class PersonOverviewController {
             phoneNumberField.setText("");
         }
     }
+
+    private void dataToFile(){
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter("PhoneBook.txt"))){
+            int size = personTable.getItems().size();
+            while(size != 0) {
+                --size;
+                bw.write(nameColumn.getCellData(size) + ". " + phoneNumberColumn.getCellData(size) + "\n");
+            }
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
